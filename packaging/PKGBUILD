@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=ootunnel-bin
+_pkgname=ootunnel
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Encrypted point-to-point WireGuard mesh tunnel establishing zero-trust paths."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/ootunnel"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('ootunnel')
+conflicts=('ootunnel')
+source_x86_64=("${url}/releases/download/v${pkgver}/ootunnel-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/ootunnel-linux-x86_64" "${pkgdir}/usr/bin/ootunnel"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/ootunnel-uninstall"
+}
